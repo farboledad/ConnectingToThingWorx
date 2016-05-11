@@ -1,0 +1,181 @@
+[
+  {
+    "order": 0,
+    "label": "Sheet 1",
+    "id": "2e26a83.8904e58",
+    "type": "tab",
+    "children": []
+  },
+  {
+    "id": "4f185067.f3613",
+    "type": "thingworx server",
+    "__package": "luvitred/services",
+    "__version": "0.1.0",
+    "server": "ge2-8280.cloud.thingworx.com",
+    "port": "80",
+    "usehttps": false,
+    "tlsver": "TLSv1_1",
+    "selfsigned": false,
+    "appkey": "8303cc7c-59f3-4b3e-83b2-cf1c20777bb4",
+    "continuous": true,
+    "protodebug": false,
+    "period": "0",
+    "conntime": "0",
+    "pingrate": "55",
+    "localtimeout": "5",
+    "name": "ThingWorx"
+  },
+  {
+    "id": "319f7066.d1d47",
+    "type": "thingworx thing",
+    "__package": "luvitred/services",
+    "__version": "0.1.0",
+    "thingsrc": "name",
+    "thingname": "CloudGate"
+  },
+  {
+    "id": "9e94749.2121d88",
+    "type": "inject",
+    "__package": "luvitred/core-core",
+    "__version": "0.1.0",
+    "name": "Random1",
+    "topic": "rand_num1",
+    "payload": "",
+    "payloadType": "rinteger",
+    "fromval": 0,
+    "toval": "100",
+    "repeat": "10",
+    "crontab": "",
+    "once": false,
+    "x": 212.5,
+    "y": 50,
+    "z": "2e26a83.8904e58",
+    "wires": [
+      [
+        "11c50206.c3c73e"
+      ]
+    ]
+  },
+  {
+    "id": "48c62a45.d69224",
+    "type": "debug",
+    "__package": "luvitred/core-core",
+    "__version": "0.1.0",
+    "name": "",
+    "all": false,
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 550,
+    "y": 150,
+    "z": "2e26a83.8904e58",
+    "wires": []
+  },
+  {
+    "id": "1714a75b.b64959",
+    "type": "thingworx multi out",
+    "__package": "luvitred/services",
+    "__version": "0.1.0",
+    "server": "4f185067.f3613",
+    "thing": "319f7066.d1d47",
+    "queueenabled": false,
+    "queue": "",
+    "properties": [
+      {
+        "name": "rand_num1",
+        "type": "number"
+      },
+      {
+        "name": "rand_num2",
+        "type": "number"
+      }
+    ],
+    "x": 600,
+    "y": 100,
+    "z": "2e26a83.8904e58",
+    "wires": []
+  },
+  {
+    "id": "eb3fa126.d95a8",
+    "type": "inject",
+    "__package": "luvitred/core-core",
+    "__version": "0.1.0",
+    "name": "Random2",
+    "topic": "rand_num2",
+    "payload": "",
+    "payloadType": "rnumber",
+    "fromval": 0,
+    "toval": "100",
+    "repeat": "10",
+    "crontab": "",
+    "once": false,
+    "x": 212.5,
+    "y": 150,
+    "z": "2e26a83.8904e58",
+    "wires": [
+      [
+        "11c50206.c3c73e"
+      ]
+    ]
+  },
+  {
+    "id": "11c50206.c3c73e",
+    "type": "combine",
+    "__package": "luvitred/core-logic",
+    "__version": "0.1.0",
+    "condition": "rand_num1 and rand_num2",
+    "clear": "rand_num1,rand_num2",
+    "topic": "report",
+    "collapse": false,
+    "name": "Combined",
+    "x": 387.5,
+    "y": 100,
+    "z": "2e26a83.8904e58",
+    "wires": [
+      [
+        "48c62a45.d69224",
+        "1714a75b.b64959"
+      ]
+    ]
+  },
+  {
+    "id": "363511ae.5457be",
+    "type": "thingworx in",
+    "__package": "luvitred/services",
+    "__version": "0.1.0",
+    "server": "4f185067.f3613",
+    "thing": "319f7066.d1d47",
+    "name": "command",
+    "chartype": "property",
+    "inputshape": "",
+    "outputshape": "",
+    "inputtype": "none",
+    "outputtype": "none",
+    "proptype": "number",
+    "storeinflash": false,
+    "topic": "",
+    "x": 350,
+    "y": 225,
+    "z": "2e26a83.8904e58",
+    "wires": [
+      [
+        "245191fd.59e51e"
+      ]
+    ]
+  },
+  {
+    "id": "245191fd.59e51e",
+    "type": "debug",
+    "__package": "luvitred/core-core",
+    "__version": "0.1.0",
+    "name": "",
+    "all": false,
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 575,
+    "y": 225,
+    "z": "2e26a83.8904e58",
+    "wires": []
+  }
+]
